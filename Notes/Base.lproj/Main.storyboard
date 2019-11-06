@@ -68,20 +68,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="245" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="z2i-RO-PxP">
-                                <rect key="frame" x="20" y="98" width="374" height="710"/>
+                                <rect key="frame" x="20" y="98" width="374" height="744"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7d-9N-3hV">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="22"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="21"/>
+                                        <color key="backgroundColor" red="0.84083749484873105" green="0.93666719543147203" blue="0.85778805344069564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="2Ji-F6-CVs" id="CEv-Ad-JAT"/>
                                         </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" text="Type here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DeJ-Kv-Hs1">
-                                        <rect key="frame" x="0.0" y="27" width="374" height="683"/>
+                                        <rect key="frame" x="0.0" y="26" width="374" height="718"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -96,7 +96,7 @@
                         <color key="backgroundColor" red="0.93031488819999997" green="0.98913388319999995" blue="0.941256816" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="z2i-RO-PxP" firstAttribute="leading" secondItem="LEC-ba-fD5" secondAttribute="leading" constant="20" id="2Nx-NW-Yrd"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="z2i-RO-PxP" secondAttribute="bottom" constant="54" id="OR8-59-dVA"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="z2i-RO-PxP" secondAttribute="bottom" constant="20" id="OR8-59-dVA"/>
                             <constraint firstItem="z2i-RO-PxP" firstAttribute="top" secondItem="LEC-ba-fD5" secondAttribute="top" constant="10" id="WF9-ST-ku6"/>
                             <constraint firstItem="LEC-ba-fD5" firstAttribute="trailing" secondItem="z2i-RO-PxP" secondAttribute="trailing" constant="20" id="lJq-89-Gi1"/>
                         </constraints>
@@ -111,6 +111,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomConstraint" destination="OR8-59-dVA" id="E0e-mB-loU"/>
                         <outlet property="contentsTextView" destination="DeJ-Kv-Hs1" id="tWo-Vu-Wfe"/>
                         <outlet property="saveButton" destination="gLg-pK-A0y" id="9q6-Ji-RGH"/>
                         <outlet property="titleTextField" destination="Z7d-9N-3hV" id="hbt-ig-ms7"/>

@@ -14,6 +14,7 @@ class NoteViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var note: Note!
     var managedContext: NSManagedObjectContext!
@@ -25,17 +26,38 @@ class NoteViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         titleTextField.text = note.title
         contentsTextView.text = note.content
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(with:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
     }
     
+    @objc func keyboardWillShow(with notification: NSNotification) {
+        let key = "UIKeyboardFrameEndUserInfoKey"
+        guard let keyboardFrame = notification.userInfo?[key] as? NSValue else { return }
+        
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        
+        bottomConstraint.constant = keyboardHeight
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
  
     @IBAction func handleSave(_ sender: UIBarButtonItem) {
-        guard let title = titleTextField.text, !title.isEmpty else { return }
         guard let contents = contentsTextView.text, !contents.isEmpty else { return }
+        guard var title = titleTextField.text, !title.isEmpty else { return }
         
         if note != nil {
             CoreDataStack.shared.saveChanges(noteID: note.objectID, title: title, content: contentsTextView.text)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
+            if title == "Title" {
+                title = "No Title"
+            }
             CoreDataStack.shared.addNewNote(title: title, contents: contents)
             self.navigationController?.popToRootViewController(animated: true)
         }
@@ -50,11 +72,25 @@ class NoteViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if titleTextField.text == "Title" {
+        if titleTextField.text == "Title" || titleTextField.text == "No Title" {
             titleTextField.text = ""
             titleTextField.textColor = .black
         }
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "Type here..."
+            textView.textColor = .darkGray
+        }
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if titleTextField.text == "" {
+            titleTextField.text = "Title"
+            titleTextField.textColor = .darkGray
+        }
+    }
     
 }

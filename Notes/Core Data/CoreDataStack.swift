@@ -41,11 +41,15 @@ class CoreDataStack {
         saveContext()
     }
     
+    func delete(note: Note) {
+        managedContext.delete(note)
+        saveContext()
+    }
+    
     func saveContext() {
         do {
             try managedContext.save()
             managedContext.refreshAllObjects()
-            
         }
         catch { print("Error: \(error)") }
     }

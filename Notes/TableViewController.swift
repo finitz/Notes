@@ -39,7 +39,6 @@ class TableViewController: UITableViewController {
             sectionNameKeyPath: nil,
             cacheName: nil)
         
-        
         do {
             try resultsController.performFetch()
         }
@@ -77,10 +76,18 @@ class TableViewController: UITableViewController {
         let note = resultsController.object(at: indexPath)
         noteViewController?.note = note
         
-        
         self.navigationController?.pushViewController(noteViewController!, animated: true)
     }
     
-    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+         if editingStyle == .delete {
+            
+            let note = resultsController.object(at: indexPath)
+            
+            CoreDataStack.shared.delete(note: note)
+            loadData()
+            tableView.reloadData()
+         }
+    }
 
 }
