@@ -17,7 +17,6 @@ class NoteViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var note: Note!
-    var managedContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,7 +11,6 @@ import CoreData
 
 class TableViewController: UITableViewController {
     var noteViewController: NoteViewController?
-
     var resultsController: NSFetchedResultsController<Note>!
     
     override func viewWillAppear(_ animated: Bool) {
